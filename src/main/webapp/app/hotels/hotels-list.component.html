@@ -1,0 +1,45 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@hotels.list.headline">Hotelses</h1>
+    <div>
+        <a routerLink="/hotelss/add" class="btn btn-primary ms-2" i18n="@@hotels.list.createNew">Create new Hotels</a>
+    </div>
+</div>
+@if (!hotelses || hotelses.length === 0) {
+<div i18n="@@hotels.list.empty">No Hotelses could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@hotels.idHotel.label">Id Hotel</th>
+                <th scope="col" i18n="@@hotels.reserved.label">Reserved</th>
+                <th scope="col" i18n="@@hotels.nameHotel.label">Name Hotel</th>
+                <th scope="col" i18n="@@hotels.adressHotel.label">Adress Hotel</th>
+                <th scope="col" i18n="@@hotels.priceHotel.label">Price Hotel</th>
+                <th scope="col" i18n="@@hotels.phoneHotel.label">Phone Hotel</th>
+                <th scope="col" i18n="@@hotels.ratingHotel.label">Rating Hotel</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (hotels of hotelses; track hotels.idHotel) {
+            <tr>
+                <td>{{ hotels.idHotel }}</td>
+                <td>{{ hotels.reserved }}</td>
+                <td>{{ hotels.nameHotel }}</td>
+                <td>{{ hotels.adressHotel }}</td>
+                <td>{{ hotels.priceHotel }}</td>
+                <td>{{ hotels.phoneHotel }}</td>
+                <td>{{ hotels.ratingHotel }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/hotelss/edit', hotels.idHotel]" class="btn btn-sm btn-secondary" i18n="@@hotels.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(hotels.idHotel!)" class="btn btn-sm btn-secondary" i18n="@@hotels.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

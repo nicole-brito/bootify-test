@@ -1,0 +1,37 @@
+<div class="d-flex flex-wrap mb-4">
+    <h1 class="flex-grow-1" i18n="@@clients.list.headline">Clientses</h1>
+    <div>
+        <a routerLink="/clientss/add" class="btn btn-primary ms-2" i18n="@@clients.list.createNew">Create new Clients</a>
+    </div>
+</div>
+@if (!clientses || clientses.length === 0) {
+<div i18n="@@clients.list.empty">No Clientses could be found.</div>
+} @else {
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th scope="col" i18n="@@clients.cpfClient.label">Cpf Client</th>
+                <th scope="col" i18n="@@clients.nameClient.label">Name Client</th>
+                <th scope="col" i18n="@@clients.phoneClient.label">Phone Client</th>
+                <th><!-- --></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (clients of clientses; track clients.cpfClient) {
+            <tr>
+                <td>{{ clients.cpfClient }}</td>
+                <td>{{ clients.nameClient }}</td>
+                <td>{{ clients.phoneClient }}</td>
+                <td>
+                    <div class="float-end text-nowrap">
+                        <a [routerLink]="['/clientss/edit', clients.cpfClient]" class="btn btn-sm btn-secondary" i18n="@@clients.list.edit">Edit</a>
+                        <button type="button" (click)="confirmDelete(clients.cpfClient!)" class="btn btn-sm btn-secondary" i18n="@@clients.list.delete">Delete</button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}
